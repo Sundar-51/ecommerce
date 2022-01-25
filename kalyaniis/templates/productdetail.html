@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+{% block 'body' %}
+
+<main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                {% for item in images%}
+                <div class="swiper-slide">
+                  <img src="../{{ item }}" alt="">
+                </div>
+                {% endfor %}
+
+                {% if video %}
+                <div class="swiper-slide">
+                  <video id="myVideo" controls><source src="../{{product.video}}" type="video/mp4"></video>
+                </div>
+                {% endif %}
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="portfolio-info">
+              <h3>{{ product.productname }}</h3>
+              <p class="prod-category">{{ product.category }}</p>
+              <a class="nav-link scrollto getstartedwhatsapp" onclick="openChat()" target="_blank">
+                <span><i class="fa fa-whatsapp fa-icon"></i></span>&nbsp;WhatsApp DM
+              </a>
+            </div>
+            <div class="portfolio-description">
+              <h2>Product description</h2>
+              <p class="prod-description">
+                {{ product.description }}
+              </p>
+              <div class="portfolio-share">
+                <p>Share<span>
+                  <a href="whatsapp://send?text=https://127.0.0.1:8000/products/{{ product.product_id }}" data-action="share/whatsapp/share" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on whatsapp">
+                    <i class="fa fa-whatsapp fa-icon"></i>
+                  </a>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://127.0.0.1:8000/products/{{ product.product_id }}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook">
+                    <i class="fa fa-facebook fa-icon"></i>
+                  </a>
+                  <a href="https://twitter.com/share?url=https://127.0.0.1:8000/products/{{ product.product_id }}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Twitter">
+                    <i class="fa fa-twitter fa-icon"></i>
+                  </a>
+                </span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <script>
+    function openChat() {
+      url = window.location.href
+      window.open("https://wa.me/+919363303725/?text=I am interested in this product. "+encodeURIComponent(url))
+    }
+
+    if(document.getElementById('myVideo')){
+      document.getElementById('myVideo').addEventListener("playing", () => {
+        swiper.autoplay.stop();
+      });
+    }
+
+    
+
+  </script>
+
+{% endblock %}
